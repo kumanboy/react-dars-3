@@ -1,12 +1,11 @@
-import React from 'react'
-import JSXRules from "./components/JSXRules.jsx";
+import Salomlashish from "./components/Salomlashish.jsx";
+import ProductInfo from "./components/ProductInfo.jsx";
 
-function App() {
+export const App = () => {
     return (
         <div>
-            <JSXRules/>
+            <Salomlashish/>
+            <ProductInfo/>
         </div>
     )
 }
-
-export default App
