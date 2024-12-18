@@ -1,15 +1,14 @@
-import "./index.css"
-import { PiAlienDuotone } from "react-icons/pi";
-import {IoIosHappy} from "react-icons/io";
+import ComponentBir from "./components/ComponentBir.jsx";
+import ComponentIkki from "./components/ComponentIkki.jsx";
+import {useState} from "react";
+
 export const App = () => {
-
-
-
+    const [number, setNumber] = useState(0);
+    const [decrement, setDecrement] = useState(0);
     return (
-        <>
-            <h1>Hello World <PiAlienDuotone /> <IoIosHappy /></h1>
-        </>
-
+        <section>
+            <ComponentBir number={number} setNumber={()=>setNumber(number+1)} className={"title"}/>
+            <ComponentIkki number={decrement} setNumber={()=>setDecrement((decrement-1))} className={"title"}/>
+        </section>
     )
 }
-
