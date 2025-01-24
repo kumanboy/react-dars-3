@@ -1,14 +1,28 @@
-import ComponentBir from "./components/ComponentBir.jsx";
-import ComponentIkki from "./components/ComponentIkki.jsx";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 
 export const App = () => {
-    const [number, setNumber] = useState(0);
-    const [decrement, setDecrement] = useState(0);
-    return (
-        <section>
-            <ComponentBir number={number} setNumber={()=>setNumber(number+1)} className={"title"}/>
-            <ComponentIkki number={decrement} setNumber={()=>setDecrement((decrement-1))} className={"title"}/>
-        </section>
+    const [data,setData] = useState([]);
+
+    useEffect(() => {
+        async function getData() {
+            const response = await fetch("https://jsonplaceholder.typicode.com/todos")
+            const data = await response.json()
+            if (data && data.length) setData(data)
+        }
+        getData()
+    }, []);
+
+    return(
+        <div>
+            <ul>
+                {data.map((todo)=>(
+                    <ul  key={todo.id}>
+                        <li>{todo.title}</li>
+                    </ul>
+
+                ))}
+            </ul>
+        </div>
     )
 }
+
