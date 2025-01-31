@@ -1,28 +1,29 @@
-import {useState,useEffect} from "react";
+import { useReducer } from 'react';
 
+const initialState = { count: 0 };
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { count: state.count + 1 };
+        case 'DECREMENT':
+            return { count: state.count - 1 };
+        case 'RESET':
+            return { count: 0 };
+        default:
+            throw new Error('Unknown action type');
+    }
+};
 export const App = () => {
-    const [data,setData] = useState([]);
+    const [state, dispatch] = useReducer(reducer, initialState );
 
-    useEffect(() => {
-        async function getData() {
-            const response = await fetch("https://jsonplaceholder.typicode.com/todos")
-            const data = await response.json()
-            if (data && data.length) setData(data)
-        }
-        getData()
-    }, []);
-
-    return(
+    return (
         <div>
-            <ul>
-                {data.map((todo)=>(
-                    <ul  key={todo.id}>
-                        <li>{todo.title}</li>
-                    </ul>
-
-                ))}
-            </ul>
+            <h1>Count: {state.count}</h1>
+            <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+            <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+            <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
         </div>
-    )
-}
+    );
+};
 
