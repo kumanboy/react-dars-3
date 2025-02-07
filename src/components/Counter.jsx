@@ -2,7 +2,7 @@ import React from 'react'
 import {useCounter} from "../useCounter.js";
 
 const Counter = () => {
-    const {count,increment , decrement ,reset}=useCounter("0")
+    const {count,increment , decrement ,reset}=useCounter(0)
     return (
         <div>
             <p>{count}</p>
